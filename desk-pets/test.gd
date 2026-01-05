@@ -1,7 +1,7 @@
 extends Node2D
 
+@export var tempSquare: PackedScene
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var output := []
 	var exit_code = OS.execute(
@@ -23,10 +23,27 @@ func _ready() -> void:
 	if windows == null:
 		print("Failed to parse JSON")
 		return
-
+	
+	
+	#var ran: bool = false
+	var godot_pos = DisplayServer.window_get_position()
+	
 	for w in windows:
-		var rect := Rect2(w.x, w.y, w.width, w.height)
+		var rect := Rect2(w.x - godot_pos.x, w.y - godot_pos.y, w.width, w.height)
+		
 		print(rect)
+		var instance = tempSquare.instantiate()
+		instance.add_sibling(self);
+		instance.position = Vector2(w.x - godot_pos.x, w.y - godot_pos.y);
+		instance.scale.x = w.width
+		instance.scale.y = w.height
+		
+		#if(!ran):
+			#print(w.x, ", ", w.y)
+			#ran = true
+		
+		
+		
 	pass # Replace with function body.
 
 
