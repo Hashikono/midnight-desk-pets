@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://gmujd718rbs"]
 
 [ext_resource type="Texture2D" uid="uid://ds7qgoj5umtx3" path="res://icon.svg" id="1_0tvji"]
-[ext_resource type="Script" uid="uid://dpc47ii22mwje" path="res://pets.gd" id="1_7shrm"]
+[ext_resource type="Script" uid="uid://c64qemxv2lhmq" path="res://test.gd" id="1_7shrm"]
 [ext_resource type="Script" uid="uid://ddp8f1mao25r0" path="res://pet.gd" id="1_dtscw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dtscw"]
