@@ -1,12 +1,12 @@
 # midnight-desk-pets
 Desktop pets with a murder mystery twist to it (●'◡'●)
 
-#IMPORTANT
+# IMPORTANT
 - This program only works on __WINDOWS__ as of now
 - Your computer must be in __ENGLISH__ or weird things will happen 
     - Take it from a guy that was coding on a Japanese computer
 
-#Installation Guide
+# Installation Guide
 - Itch.io link 
     - run on the latest version of your browser
     - Link [here](https://slloom.itch.io/midnight-desk-pet)
@@ -17,7 +17,7 @@ Desktop pets with a murder mystery twist to it (●'◡'●)
 
 
 
-#References (for a feature that's still in the making)
+# References (for a feature that's still in the making)
 - This is merely a model of the edge detection stuff for the sprite's usable platforms and will be
 translated into GDscript once everything is finalized
 
