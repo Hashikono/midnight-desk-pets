@@ -2,10 +2,22 @@
 Desktop pets with a murder mystery twist to it (●'◡'●)
 
 #IMPORTANT
-- This program only works on windows as of now
-- Your computer must be in ENGLISH or weird things will happen 
+- This program only works on __WINDOWS__ as of now
+- Your computer must be in __ENGLISH__ or weird things will happen 
+    - Take it from a guy that was coding on a Japanese computer
 
-#References
+#Installation Guide
+- Itch.io link 
+    - run on the latest version of your browser
+    - Link: 
+- Downloading the entire zip file from github
+    - Extract the file
+    - Open the desk-pets apps on Godot
+    - Press play on the top right section (make sure to disable embeds)
+
+
+
+#References (for a feature that's still in the making)
 - This is merely a model of the edge detection stuff for the sprite's usable platforms and will be
 translated into GDscript once everything is finalized
 
