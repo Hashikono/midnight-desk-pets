@@ -64,16 +64,16 @@ func runGravity():
 		dragInertia.y *= -1
 		
 		if(bouncy):
-			dragInertia.y *= -1
+			dragInertia.y = abs(dragInertia.y)
 		else:
 			dragInertia.y = 0
 		
-		window.position.y = usable_rect.position.y
+		#window.position.y = usable_rect.position.y
 	if window.position.y + window.size.y > usable_rect.end.y:
 		velocity.y = 0;
 		
 		if(bouncy):
-			dragInertia.y *= -1
+			dragInertia.y = abs(dragInertia.y) * -1
 		else:
 			dragInertia.y = 0
 		
@@ -87,9 +87,9 @@ func drag():
 	velocity.y = 0
 	
 	if(dragInertia.x < 0):
-		direction.x = -1
+		direction.x = abs(dragInertia.y) * -1
 	if(dragInertia.x > 0):
-		direction.x = 1
+		direction.x = abs(dragInertia.y)
 	pass
 
 func runInertia(_delta):
