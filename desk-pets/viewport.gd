@@ -30,21 +30,21 @@ func _process(_delta):
 	if(!beingDragged):
 		var move_vector = Vector2i(direction * move_speed)
 		
-		#window.position += move_vector
-		window.position = lerp(Vector2(window.position), Vector2(DisplayServer.mouse_get_position()), move_speed * _delta) #mouse follow behaviour
+		window.position += move_vector
+		#window.position = lerp(Vector2(window.position), Vector2(DisplayServer.mouse_get_position()), move_speed * _delta) #mouse follow behaviour
 		
 		if window.position.x + window.size.x > usable_rect.end.x:
 			direction.x = -1
 		elif window.position.x < usable_rect.position.x:
 			direction.x = 1
 
-		#velocity.y += gravity
-		#velocity.y = min(velocity.y, max_fall_speed)
-		#window.position += Vector2i(velocity)
-#
-		#if window.position.y >= target_y:
-			#window.position.y = target_y
-			#velocity.y = 0
+		velocity.y += gravity
+		velocity.y = min(velocity.y, max_fall_speed)
+		window.position += Vector2i(velocity)
+
+		if window.position.y >= target_y:
+			window.position.y = target_y
+			velocity.y = 0
 		pass
 	else:
 		var mousePos = DisplayServer.mouse_get_position()
