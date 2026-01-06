@@ -98,7 +98,7 @@ func moveBackAndForth():
 func moveTowardsTargetLocation(_delta):
 	
 	if(GetMagnitudeOf(dragInertia) == 0):
-		if(positionToMoveTo.y > usable_rect.end.y):
+		if(positionToMoveTo.y + minHoverHeight > usable_rect.end.y):
 			flying = true;
 		
 		#print(flying)
@@ -109,6 +109,8 @@ func moveTowardsTargetLocation(_delta):
 func changeDirectionsAtEdge():
 	if window.position.x + window.size.x > usable_rect.end.x:
 		direction.x = -1
+	elif window.position.x < usable_rect.position.x:
+		direction.x = 1
 		$pet.flip_h = true
 		$pet/white_eye.flip_h = true
 		$pet/pupil.flip_h = true
@@ -190,7 +192,17 @@ func animate():
 	if(!flying):
 		$pet.play("normal")
 	else:
-		$pet.play("bird_fly")
+		$pet.play("bird_flying")
+	
+	if(velocity.x + dragInertia.x > 0):
+		$pet.flip_h = true
+		$pet/white_eye.flip_h = true
+		$pet/pupil.flip_h = true
+	if(velocity.x + dragInertia.x < 0):
+		$pet.flip_h = false
+		$pet/white_eye.flip_h = false
+		$pet/pupil.flip_h = false
+	
 
 func _input(event):
 	if event is InputEventMouseButton:
