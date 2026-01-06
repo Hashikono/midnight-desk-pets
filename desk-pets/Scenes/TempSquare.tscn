@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://drr8bdm3coyib"]
 
 [ext_resource type="Texture2D" uid="uid://dphc88j32yqfh" path="res://Assets/Square.png" id="1_yiqcv"]
-[ext_resource type="Script" uid="uid://dj337tj51n0am" path="res://test.gd" id="2_uo85a"]
+[ext_resource type="Script" uid="uid://bainn557om4id" path="res://Scenes/WindowPlatformScript.gd" id="2_uo85a"]
 
 [node name="Square" type="Sprite2D"]
 texture = ExtResource("1_yiqcv")
