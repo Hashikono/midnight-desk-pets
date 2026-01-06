@@ -1,6 +1,6 @@
 extends Node2D
 
-var move_speed = 10
+var move_speed = 1
 
 var direction = Vector2(1, 0) 
 var velocity := Vector2.ZERO
@@ -10,12 +10,19 @@ var max_fall_speed := 10
 @onready var usable_rect = DisplayServer.screen_get_usable_rect()
 @onready var target_y = usable_rect.end.y - window.size.y
 
+var flying: bool = false
+var currentDecisionCooldown: float
+var minRepositioningCooldown: float = 10
+var maxRepositioningCooldown: float = 150
+var minHoverHeight: float = 5
+
+var positionToMoveTo: Vector2
+
 var beingDragged: bool = false
 var dragDifference: Vector2
 var dragInertia: Vector2
 
 var bouncy: bool = true
-
 func _ready() -> void:
 	$pet.flip_h = true
 	$pet/white_eye.flip_h = true
@@ -35,7 +42,8 @@ func _process(_delta):
 	
 	
 	if(!beingDragged):
-		moveBackAndForth()
+		processTravelCooldown(_delta)
+		moveTowardsTargetLocation(_delta)
 		#moveToMouse(_delta)
 		
 		changeDirectionsAtEdge()
@@ -44,8 +52,31 @@ func _process(_delta):
 		runGravity()
 		pass
 	else:
+		currentDecisionCooldown = 0
 		drag()
 		pass
+	
+	animate()
+
+func processTravelCooldown(_delta: float):
+	if(currentDecisionCooldown < 0):
+		wanderToRandomPoint()
+		currentDecisionCooldown = randf_range(minRepositioningCooldown, maxRepositioningCooldown);
+	else:
+		currentDecisionCooldown -= _delta
+		#print(currentDecisionCooldown)
+	pass
+
+func wanderToRandomPoint():
+	var chosenLocation = Vector2(randf_range(usable_rect.position.x, usable_rect.end.x), randf_range(usable_rect.position.y, usable_rect.end.y))
+	print(chosenLocation)
+	
+	if(chosenLocation.y + minHoverHeight > usable_rect.end.y):
+		chosenLocation.y = usable_rect.end.y;
+	
+	print(chosenLocation)
+	positionToMoveTo = chosenLocation
+	pass
 
 func moveToMouse(_delta):
 	window.position = lerp(Vector2(window.position), Vector2(DisplayServer.mouse_get_position()), move_speed * _delta) #mouse follow behaviour
@@ -53,6 +84,17 @@ func moveToMouse(_delta):
 func moveBackAndForth():
 	var move_vector = Vector2i(direction * move_speed)
 	window.position += move_vector
+
+func moveTowardsTargetLocation(_delta):
+	
+	if(GetMagnitudeOf(dragInertia) == 0):
+		if(positionToMoveTo.y > usable_rect.end.y):
+			flying = true;
+		
+		#print(flying)
+		#print(positionToMoveTo, ", ", usable_rect.position.y)
+		window.position = (Vector2(window.position)).lerp(positionToMoveTo, move_speed * _delta)
+	pass
 
 func changeDirectionsAtEdge():
 	if window.position.x + window.size.x > usable_rect.end.x:
@@ -67,9 +109,11 @@ func changeDirectionsAtEdge():
 		$pet/pupil.flip_h = true
 
 func runGravity():
-	velocity.y += gravity
-	velocity.y = min(velocity.y, max_fall_speed)
-	window.position += Vector2i(velocity)
+	
+	if(!flying):
+		velocity.y += gravity
+		velocity.y = min(velocity.y, max_fall_speed)
+		window.position += Vector2i(velocity)
 	
 	if window.position.y < usable_rect.position.y:
 		dragInertia.y *= -1
@@ -102,6 +146,8 @@ func drag():
 	if(dragInertia.x > 0):
 		direction.x = abs(dragInertia.y)
 	pass
+	
+	print(window.position.y)
 
 func runInertia(_delta):
 	dragInertia = dragInertia.lerp(Vector2(), _delta * move_speed);
@@ -129,6 +175,12 @@ func deleteInertiaAtEdges():
 			dragInertia.x = 0;
 		
 		window.position.x = usable_rect.position.x;
+
+func animate():
+	if(!flying):
+		$pet.play("normal")
+	else:
+		$pet.play("bird_fly")
 
 func _input(event):
 	if event is InputEventMouseButton:
