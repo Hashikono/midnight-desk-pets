@@ -1,3 +1,41 @@
+import json
+import win32gui
+
+windows = []
+
+def enum_handler(hwnd, z):
+    if not win32gui.IsWindowVisible(hwnd):
+        return
+
+    rect = win32gui.GetWindowRect(hwnd)
+    x1, y1, x4, y4 = rect
+
+    if x4 - x1 <= 0 or y4 - y1 <= 0:
+        return
+
+    title = win32gui.GetWindowText(hwnd)
+
+    windows.append([
+        title,   # window name
+        z,       # z layer (0 = top)
+        x1, y1,  # top-left
+        x4, y4   # bottom-right
+    ])
+
+# EnumWindows runs top → bottom
+z = 0
+def callback(hwnd, _):
+    global z
+    enum_handler(hwnd, z)
+    z += 1
+    return True
+
+win32gui.EnumWindows(callback, None)
+
+# Output as JSON (Godot-friendly)
+print(json.dumps(windows))
+
+
 # This is merely a model of the edge detection stuff for the sprite's usable platforms and will be
 # translated into GDscript once everything is finalized
 
@@ -41,6 +79,7 @@
 
 #placeholder for output retrieved from window_helper.exe
 #   - All windows should/will be sorted from top down
+
 windowHelperOutput1 = [
     ["window 1", 0, 1, 1, 4, 4],
     ["window 2", 1, 0, 0, 2, 2],
@@ -150,19 +189,3 @@ def edgeDetection(window_data):
     grid = create_grid(window_data, (5, 5))
     return detect_horizontal_top_edges(grid)
 
-
-# Test
-print("=" * 50)
-print("Testing windowHelperOutput1 (should give [[0,0,2,0], [3,1,4,1]]):")
-result1 = edgeDetection(windowHelperOutput1)
-print(f"Result: {result1}")
-
-print("\n" + "=" * 50)
-print("Testing windowHelperOutput2 (should give [[0,0,2,0], [1,1,4,1]]):")
-result2 = edgeDetection(windowHelperOutput2)
-print(f"Result: {result2}")
-
-print("\n" + "=" * 50)
-print("Summary:")
-print(f"windowHelperOutput1: {result1}")
-print(f"windowHelperOutput2: {result2}")
