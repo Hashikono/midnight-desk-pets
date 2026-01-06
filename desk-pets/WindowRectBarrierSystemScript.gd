@@ -12,6 +12,7 @@ func _process(delta: float) -> void:
 	pass
 
 
+#simply pop in two opposite corners
 func createLine(point1: Vector2, point2: Vector2):
 	var middlePoint = (point2 + point1) / 2
 	var instance = tempSquare.instantiate()
