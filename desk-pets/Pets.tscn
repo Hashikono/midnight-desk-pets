@@ -1,12 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://gmujd718rbs"]
+[gd_scene load_steps=14 format=3 uid="uid://c7v3olbv3a0i6"]
 
 [ext_resource type="Script" uid="uid://bimu414n38ybd" path="res://viewport.gd" id="1_7shrm"]
 [ext_resource type="Texture2D" uid="uid://bw6rn3iypqm5c" path="res://Art/MurderyBirdSpritesheet.png" id="2_4wimt"]
 [ext_resource type="Texture2D" uid="uid://3eit3kv7bhi0" path="res://Art/MurderyBirdPupilSpritesheet.png" id="3_l1vat"]
 [ext_resource type="Texture2D" uid="uid://bx5enrb1lhoo5" path="res://Art/MurderyBirdEyeWhiteSpritesheet.png" id="4_gxjio"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtscw"]
-size = Vector2(1155.5, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpfvp"]
 atlas = ExtResource("2_4wimt")
@@ -92,15 +89,6 @@ animations = [{
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_7shrm")
-
-[node name="floor" type="StaticBody2D" parent="."]
-position = Vector2(573, 675)
-scale = Vector2(9.03125, 0.53125)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
-position = Vector2(0.9965403, -39.529434)
-scale = Vector2(0.11072665, 1.882353)
-shape = SubResource("RectangleShape2D_dtscw")
 
 [node name="pet" type="AnimatedSprite2D" parent="."]
 position = Vector2(123, 209)

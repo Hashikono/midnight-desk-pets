@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="DeskPets"
-run/main_scene="uid://gmujd718rbs"
+run/main_scene="uid://c7v3olbv3a0i6"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
