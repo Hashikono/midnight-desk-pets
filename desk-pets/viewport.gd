@@ -14,7 +14,7 @@ var flying: bool = false
 var currentDecisionCooldown: float
 var minRepositioningCooldown: float = 10
 var maxRepositioningCooldown: float = 150
-var minHoverHeight: float = 5
+var minHoverHeight: float = 500
 
 var positionToMoveTo: Vector2
 
@@ -64,17 +64,15 @@ func processTravelCooldown(_delta: float):
 		currentDecisionCooldown = randf_range(minRepositioningCooldown, maxRepositioningCooldown);
 	else:
 		currentDecisionCooldown -= _delta
-		#print(currentDecisionCooldown)
 	pass
 
 func wanderToRandomPoint():
 	var chosenLocation = Vector2(randf_range(usable_rect.position.x, usable_rect.end.x), randf_range(usable_rect.position.y, usable_rect.end.y))
-	print(chosenLocation)
 	
 	if(chosenLocation.y + minHoverHeight > usable_rect.end.y):
 		chosenLocation.y = usable_rect.end.y;
 	
-	print(chosenLocation)
+	#print(chosenLocation)
 	positionToMoveTo = chosenLocation
 	pass
 
@@ -88,11 +86,12 @@ func moveBackAndForth():
 func moveTowardsTargetLocation(_delta):
 	
 	if(GetMagnitudeOf(dragInertia) == 0):
-		if(positionToMoveTo.y + minHoverHeight > usable_rect.end.y):
+		if(positionToMoveTo.y + minHoverHeight < usable_rect.end.y):
 			flying = true;
+		elif(window.position.y + minHoverHeight > usable_rect.end.y):
+			flying = false;
 		
-		#print(flying)
-		#print(positionToMoveTo, ", ", usable_rect.position.y)
+		
 		window.position = (Vector2(window.position)).lerp(positionToMoveTo, move_speed * _delta)
 	pass
 
@@ -101,9 +100,6 @@ func changeDirectionsAtEdge():
 		direction.x = -1
 	elif window.position.x < usable_rect.position.x:
 		direction.x = 1
-		$pet.flip_h = true
-		$pet/white_eye.flip_h = true
-		$pet/pupil.flip_h = true
 
 func runGravity():
 	
@@ -144,7 +140,7 @@ func drag():
 		direction.x = abs(dragInertia.y)
 	pass
 	
-	print(window.position.y)
+	flying = false
 
 func runInertia(_delta):
 	dragInertia = dragInertia.lerp(Vector2(), _delta * move_speed);
@@ -178,12 +174,11 @@ func animate():
 		$pet.play("normal")
 	else:
 		$pet.play("bird_flying")
-	
-	if(velocity.x + dragInertia.x > 0):
+	if(velocity.x + dragInertia.x > 0 || (!beingDragged && dragInertia == Vector2() && (positionToMoveTo - Vector2(window.position)).x > 0 && abs((positionToMoveTo - Vector2(window.position)).x) > 1)):
 		$pet.flip_h = true
 		$pet/white_eye.flip_h = true
 		$pet/pupil.flip_h = true
-	if(velocity.x + dragInertia.x < 0):
+	if(velocity.x + dragInertia.x < 0 || (!beingDragged && dragInertia == Vector2() && (positionToMoveTo - Vector2(window.position)).x < 0) && abs((positionToMoveTo - Vector2(window.position)).x) > 1):
 		$pet.flip_h = false
 		$pet/white_eye.flip_h = false
 		$pet/pupil.flip_h = false
