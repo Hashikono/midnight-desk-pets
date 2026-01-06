@@ -63,7 +63,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"bird_flying",
-"speed": 9.0
+"speed": 16.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -106,6 +106,13 @@ shape = SubResource("RectangleShape2D_dtscw")
 position = Vector2(123, 209)
 scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_fav4u")
-animation = &"normal"
+animation = &"bird_flying"
+frame_progress = 0.3918261
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="white_eye" type="Sprite2D" parent="pet"]
+show_behind_parent = true
+texture = ExtResource("4_gxjio")
+
+[node name="pupil" type="Sprite2D" parent="pet"]
+show_behind_parent = true
+texture = ExtResource("3_l1vat")
