@@ -68,12 +68,24 @@ func drag():
 	window.position = mousePos + dragDifference
 	dragInertia = Vector2(window.position) - currentPos
 	velocity.y = 0
+	
+	if(dragInertia.x < 0):
+		direction.x = -1
+	if(dragInertia.x > 0):
+		direction.x = 1
 	pass
 
 func runInertia(_delta):
-	dragInertia.lerp(Vector2(), _delta * move_speed);
+	dragInertia = dragInertia.lerp(Vector2(), _delta * move_speed);
 	window.position += Vector2i(dragInertia)
+	deleteInertiaAtEdges()
 	pass
+
+func deleteInertiaAtEdges():
+	if window.position.x + window.size.x > usable_rect.end.x:
+		dragInertia.x *= -1
+	elif window.position.x < usable_rect.position.x:
+		dragInertia.x *= -1
 
 func _input(event):
 	if event is InputEventMouseButton:
