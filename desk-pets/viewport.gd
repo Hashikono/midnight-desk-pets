@@ -1,6 +1,6 @@
 extends Node2D
 
-var move_speed = 10
+var move_speed = 1
 var direction = Vector2(1, 0) 
 var velocity := Vector2.ZERO
 var gravity := 0.4
@@ -64,6 +64,7 @@ func runGravity():
 	if window.position.y + window.size.y > usable_rect.end.y:
 		velocity.y = 0;
 		dragInertia.y *= -1
+		window.position.y = usable_rect.end.y - window.size.y
 	#if window.position.y >= target_y:
 		#window.position.y = target_y
 		#velocity.y = 0
