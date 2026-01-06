@@ -7,14 +7,14 @@ var squares: Array[Node2D] = []
 func _ready() -> void:
 	var output := []
 	var exit_code = OS.execute(
-		"WindowHelper.exe", # program
+		"edgeDetection.exe", # program
 		[],                 # arguments
 		output,             # stdout goes here
 		true                # block until finished
 		)
 
 	if(exit_code != 0):
-		print("WindowHelper failed with code:", exit_code)
+		print("Edge detection failed with code:", exit_code)
 		return
 
 	if(output.is_empty()):
@@ -31,7 +31,7 @@ func _ready() -> void:
 	var godot_pos = DisplayServer.window_get_position()
 	
 	for w in windows:
-		var rect := Rect2(w.x - godot_pos.x, w.y - godot_pos.y, w.width, w.height)
+		var rect := Rect2(w[0] - godot_pos.x, w[0] - godot_pos.y, w[0], w[0])
 		
 		print(rect)
 		#var instance = tempSquare.instantiate()
