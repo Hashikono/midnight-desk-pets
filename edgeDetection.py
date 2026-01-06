@@ -5,7 +5,7 @@ import win32api
 #WINDOWS EXTRACTION/ENUMERATION
 
 #grouping pixels for faster calculations
-CELL_SIZE = 20
+CELL_SIZE = 1
 
 def get_desktop_size():
     width  = win32api.GetSystemMetrics(78)  # SM_CXVIRTUALSCREEN

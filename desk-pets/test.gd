@@ -57,7 +57,7 @@ func _process(delta: float) -> void:
 	
 	var output := []
 	var exit_code = OS.execute(
-		"WindowHelper.exe", # program
+		"edgeDetection.exe", # program
 		[],                 # arguments
 		output,             # stdout goes here
 		true                # block until finished

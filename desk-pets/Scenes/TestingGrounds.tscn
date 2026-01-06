@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://drm3q68rmvqe6"]
+[gd_scene load_steps=4 format=3 uid="uid://drm3q68rmvqe6"]
 
 [ext_resource type="Script" uid="uid://bgpq8puve857s" path="res://WindowRectBarrierSystemScript.gd" id="1_1bywa"]
 [ext_resource type="PackedScene" uid="uid://bhdfsn76hsh21" path="res://Scenes/betterTestSquare.tscn" id="2_1bywa"]
+[ext_resource type="Script" uid="uid://dj337tj51n0am" path="res://test.gd" id="3_vvorx"]
 
 [node name="TestingGrounds" type="Node2D"]
 script = ExtResource("1_1bywa")
 tempSquare = ExtResource("2_1bywa")
 
 [node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("3_vvorx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
