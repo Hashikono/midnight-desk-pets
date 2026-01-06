@@ -1,34 +1,35 @@
 [gd_scene load_steps=6 format=3 uid="uid://gmujd718rbs"]
 
 [ext_resource type="Texture2D" uid="uid://ds7qgoj5umtx3" path="res://icon.svg" id="1_0tvji"]
-[ext_resource type="Script" uid="uid://dpc47ii22mwje" path="res://pets.gd" id="1_7shrm"]
+[ext_resource type="Script" uid="uid://bimu414n38ybd" path="res://viewport.gd" id="1_7shrm"]
 [ext_resource type="Script" uid="uid://ddp8f1mao25r0" path="res://pet.gd" id="1_dtscw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dtscw"]
-size = Vector2(1155.5, 66)
+size = Vector2(1155.5, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0tvji"]
-size = Vector2(127, 128)
+size = Vector2(128, 128)
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_7shrm")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="floor" type="StaticBody2D" parent="."]
 position = Vector2(573, 675)
 scale = Vector2(9.03125, 0.53125)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0.47058868, -5.6470947)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
+position = Vector2(0.9965403, -39.529434)
 scale = Vector2(0.11072665, 1.882353)
 shape = SubResource("RectangleShape2D_dtscw")
 
 [node name="pet" type="CharacterBody2D" parent="."]
+input_pickable = true
 script = ExtResource("1_dtscw")
 
 [node name="Sprite2D" type="Sprite2D" parent="pet"]
-position = Vector2(446, 135)
+position = Vector2(64, 64)
 texture = ExtResource("1_0tvji")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pet"]
-position = Vector2(447.5, 135)
+position = Vector2(66, 63)
 shape = SubResource("RectangleShape2D_0tvji")
