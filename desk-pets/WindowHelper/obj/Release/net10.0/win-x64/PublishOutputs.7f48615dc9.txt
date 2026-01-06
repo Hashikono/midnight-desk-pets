@@ -1,2 +1,0 @@
-C:\Users\Owner\Documents\GitHub\midnight-desk-pets\desk-pets\WindowHelper\bin\Release\net10.0\win-x64\publish\WindowHelper.pdb
-C:\Users\Owner\Documents\GitHub\midnight-desk-pets\desk-pets\WindowHelper\bin\Release\net10.0\win-x64\publish\WindowHelper.exe
