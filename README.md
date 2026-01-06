@@ -9,7 +9,7 @@ Desktop pets with a murder mystery twist to it (●'◡'●)
 #Installation Guide
 - Itch.io link 
     - run on the latest version of your browser
-    - Link: 
+    - Link [here](https://slloom.itch.io/midnight-desk-pet)
 - Downloading the entire zip file from github
     - Extract the file
     - Open the desk-pets apps on Godot
