@@ -47,6 +47,7 @@ SHOULD OUTPUT in edgeDetectionOutput: (0,0)-(2,0)  (1,1)-(4,1) -> [[0,0,2,0], [1
 - edges section deals with the horizontal lines for the borders
     - Testing: make sure the y direction when you do the +/- 1 thing to make the red border seen does not get out of bound (edge-1)
 
+```
 {
     "screen": {
         "vx": -1920,
@@ -67,3 +68,4 @@ SHOULD OUTPUT in edgeDetectionOutput: (0,0)-(2,0)  (1,1)-(4,1) -> [[0,0,2,0], [1
     ]
 
 }
+```
