@@ -1,6 +1,11 @@
 extends Node2D
 
+<<<<<<< HEAD
 var move_speed = 100
+=======
+var move_speed = 10
+
+>>>>>>> aa2c1fbda3c6386232b696cc73c08a129aec6b1e
 var direction = Vector2(1, 0) 
 var velocity := Vector2.ZERO
 var gravity := 0.4
@@ -16,13 +21,16 @@ var dragInertia: Vector2
 var bouncy: bool = true
 
 func _ready() -> void:
-	$pet.flip_h = false
+	$pet.flip_h = true
+	$pet/white_eye.flip_h = true
+	$pet/pupil.flip_h = true
 	#var window_id := window.get_window_id()
 	DisplayServer.window_set_mouse_passthrough(PackedVector2Array())
 	window.position = Vector2i(0, usable_rect.position.y)
 
 	velocity = Vector2.ZERO
 	$pet.play("normal")
+	
 func _process(_delta):
 	
 	window = get_window()
@@ -54,9 +62,13 @@ func changeDirectionsAtEdge():
 	if window.position.x + window.size.x > usable_rect.end.x:
 		direction.x = -1
 		$pet.flip_h = false
+		$pet/white_eye.flip_h = false
+		$pet/pupil.flip_h = false
 	elif window.position.x < usable_rect.position.x:
 		direction.x = 1
 		$pet.flip_h = true
+		$pet/white_eye.flip_h = true
+		$pet/pupil.flip_h = true
 
 func runGravity():
 	velocity.y += gravity
@@ -134,3 +146,6 @@ func _input(event):
 
 func GetMagnitudeOf(value: Vector2):
 	return sqrt((value.x * value.x) + (value.y * value.y))
+
+
+	

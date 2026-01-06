@@ -1,111 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://gmujd718rbs"]
+[gd_scene load_steps=4 format=3 uid="uid://gmujd718rbs"]
 
-[ext_resource type="Script" uid="uid://bimu414n38ybd" path="res://viewport.gd" id="1_7shrm"]
-[ext_resource type="Texture2D" uid="uid://bw6rn3iypqm5c" path="res://Art/MurderyBirdSpritesheet.png" id="2_4wimt"]
-[ext_resource type="Texture2D" uid="uid://3eit3kv7bhi0" path="res://Art/MurderyBirdPupilSpritesheet.png" id="3_l1vat"]
-[ext_resource type="Texture2D" uid="uid://bx5enrb1lhoo5" path="res://Art/MurderyBirdEyeWhiteSpritesheet.png" id="4_gxjio"]
+[ext_resource type="Script" uid="uid://bgpq8puve857s" path="res://WindowRectBarrierSystemScript.gd" id="1_7shrm"]
+[ext_resource type="PackedScene" uid="uid://bhdfsn76hsh21" path="res://Scenes/betterTestSquare.tscn" id="2_lpkvl"]
+[ext_resource type="Script" uid="uid://dj337tj51n0am" path="res://test.gd" id="3_4wimt"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtscw"]
-size = Vector2(1155.5, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tpfvp"]
-atlas = ExtResource("2_4wimt")
-region = Rect2(0, 0, 3508, 3508)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v7h1t"]
-atlas = ExtResource("2_4wimt")
-region = Rect2(3508, 0, 3508, 3508)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f4wtk"]
-atlas = ExtResource("2_4wimt")
-region = Rect2(7016, 0, 3508, 3508)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k0xc2"]
-atlas = ExtResource("2_4wimt")
-region = Rect2(0, 3508, 3508, 3508)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jmn7v"]
-atlas = ExtResource("2_4wimt")
-region = Rect2(3508, 3508, 3508, 3508)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bpsqo"]
-atlas = ExtResource("2_4wimt")
-region = Rect2(7016, 3508, 3508, 3508)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xr2o2"]
-atlas = ExtResource("4_gxjio")
-region = Rect2(0, 0, 3508, 3508)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qlrg2"]
-atlas = ExtResource("2_4wimt")
-region = Rect2(0, 0, 3508, 3508)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_fav4u"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tpfvp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v7h1t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_f4wtk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k0xc2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jmn7v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bpsqo")
-}],
-"loop": true,
-"name": &"bird_flying",
-"speed": 9.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("3_l1vat")
-}],
-"loop": true,
-"name": &"eye_black",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xr2o2")
-}],
-"loop": true,
-"name": &"eye_white",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qlrg2")
-}],
-"loop": true,
-"name": &"normal",
-"speed": 5.0
-}]
-
-[node name="Node2D" type="Node2D"]
+[node name="TestingGrounds" type="Node2D"]
 script = ExtResource("1_7shrm")
+tempSquare = ExtResource("2_lpkvl")
 
-[node name="floor" type="StaticBody2D" parent="."]
-position = Vector2(573, 675)
-scale = Vector2(9.03125, 0.53125)
+[node name="Node2D" type="Node2D" parent="."]
+script = ExtResource("3_4wimt")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floor"]
-position = Vector2(0.9965403, -39.529434)
-scale = Vector2(0.11072665, 1.882353)
-shape = SubResource("RectangleShape2D_dtscw")
-
-[node name="pet" type="AnimatedSprite2D" parent="."]
-position = Vector2(123, 209)
-scale = Vector2(0.08, 0.08)
-sprite_frames = SubResource("SpriteFrames_fav4u")
-animation = &"normal"
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="."]
