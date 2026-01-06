@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="DeskPets"
+run/main_scene="uid://gmujd718rbs"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,8 +22,7 @@ window/size/viewport_height=125
 window/size/borderless=true
 window/size/transparent=true
 window/subwindows/embed_subwindows=false
-window/stretch/mode="viewport"
-window/stretch/aspect="expand"
+window/stretch/aspect="ignore"
 window/per_pixel_transparency/allowed=true
 
 [editor_plugins]

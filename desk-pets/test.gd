@@ -79,25 +79,22 @@ func _process(delta: float) -> void:
 	
 	#var ran: bool = false
 	#var screenScale := DisplayServer.screen_get_scale()
-	var screenScale := get_window().content_scale_factor
-	var godot_pos: Vector2 = DisplayServer.window_get_position() * screenScale;
-	
-	#godot_pos *= screenScale;
-	
-	var wasFirst: bool = true
+	var dpi := get_window().content_scale_factor
+	var godot_pos := DisplayServer.window_get_position()  # already logical pixels
+
+	var wasFirst := true
 	for w in windows:
-		#var rect := Rect2(w.x - godot_pos.x, w.y - godot_pos.y, w.width, w.height)
-		
-		if(!wasFirst):
-			var instance = tempSquare.instantiate()
-			add_sibling(instance);
-			
-			var newPos = Vector2(w.x, w.y)
-			var localized = (Vector2(newPos.x - godot_pos.x, newPos.y - godot_pos.y) / screenScale)
-			instance.global_position = get_viewport().get_canvas_transform().affine_inverse() * localized;
-			instance.scale.x = 0.1
-			instance.scale.y = 0.1
-			squares.append(instance);
-			#print("running")
-		wasFirst = false
+		if wasFirst:
+			wasFirst = false
+			continue  # skip first window if desired
+
+		var instance = tempSquare.instantiate()
+		add_sibling(instance)
+
+		# Convert Windows physical → Godot logical, then relative to Godot window
+		var win_logical := Vector2(w.x, w.y) / dpi
+		instance.global_position = Vector2(win_logical.x - godot_pos.x, win_logical.y - godot_pos.y)
+
+		instance.scale = Vector2(0.1, 0.1)
+		squares.append(instance)
 	pass
