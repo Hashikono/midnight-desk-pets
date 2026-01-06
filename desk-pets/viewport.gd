@@ -1,6 +1,6 @@
 extends Node2D
 
-var move_speed = 1
+var move_speed = 100
 var direction = Vector2(1, 0) 
 var velocity := Vector2.ZERO
 var gravity := 0.4
