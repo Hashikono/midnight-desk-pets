@@ -57,10 +57,16 @@ func runGravity():
 	velocity.y += gravity
 	velocity.y = min(velocity.y, max_fall_speed)
 	window.position += Vector2i(velocity)
-
-	if window.position.y >= target_y:
-		window.position.y = target_y
-		velocity.y = 0
+	
+	if window.position.y < usable_rect.position.y:
+		#direction.y = -1
+		dragInertia.y *= -1
+	if window.position.y + window.size.y > usable_rect.end.y:
+		velocity.y = 0;
+		dragInertia.y *= -1
+	#if window.position.y >= target_y:
+		#window.position.y = target_y
+		#velocity.y = 0
 
 func drag():
 	var mousePos: Vector2 = DisplayServer.mouse_get_position()
