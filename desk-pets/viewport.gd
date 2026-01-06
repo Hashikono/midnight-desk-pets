@@ -16,12 +16,13 @@ var dragInertia: Vector2
 var bouncy: bool = true
 
 func _ready() -> void:
+	$pet.flip_h = false
 	#var window_id := window.get_window_id()
 	DisplayServer.window_set_mouse_passthrough(PackedVector2Array())
 	window.position = Vector2i(0, usable_rect.position.y)
 
 	velocity = Vector2.ZERO
-
+	$pet.play("normal")
 func _process(_delta):
 	
 	window = get_window()
@@ -52,8 +53,10 @@ func moveBackAndForth():
 func changeDirectionsAtEdge():
 	if window.position.x + window.size.x > usable_rect.end.x:
 		direction.x = -1
+		$pet.flip_h = false
 	elif window.position.x < usable_rect.position.x:
 		direction.x = 1
+		$pet.flip_h = true
 
 func runGravity():
 	velocity.y += gravity
