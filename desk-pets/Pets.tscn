@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7v3olbv3a0i6"]
+[gd_scene load_steps=14 format=3 uid="uid://gmujd718rbs"]
 
 [ext_resource type="Script" uid="uid://bimu414n38ybd" path="res://viewport.gd" id="1_7shrm"]
 [ext_resource type="Texture2D" uid="uid://bw6rn3iypqm5c" path="res://Art/MurderyBirdSpritesheet.png" id="2_4wimt"]
@@ -91,7 +91,7 @@ animations = [{
 script = ExtResource("1_7shrm")
 
 [node name="pet" type="AnimatedSprite2D" parent="."]
-position = Vector2(123, 209)
+position = Vector2(126, 209)
 scale = Vector2(0.08, 0.08)
 sprite_frames = SubResource("SpriteFrames_fav4u")
 animation = &"bird_flying"

@@ -9,7 +9,7 @@ var max_fall_speed := 10
 @onready var window = get_window()
 @onready var usable_rect = DisplayServer.screen_get_usable_rect()
 @onready var target_y = usable_rect.end.y - window.size.y
-
+var redbull = false
 var flying: bool = false
 var currentDecisionCooldown: float
 var minRepositioningCooldown: float = 10
@@ -42,9 +42,14 @@ func _process(_delta):
 	
 	
 	if(!beingDragged):
+		
+		if redbull:
+			moveBackAndForth() # Continuous movement every frame
+		else:
+			moveTowardsTargetLocation(_delta)
+			
 		processTravelCooldown(_delta)
-		moveTowardsTargetLocation(_delta)
-		#moveToMouse(_delta)
+		#moveTowardsTargetLocation(_delta)
 		
 		changeDirectionsAtEdge()
 		runInertia(_delta)
@@ -76,6 +81,11 @@ func wanderToRandomPoint():
 	
 	print(chosenLocation)
 	positionToMoveTo = chosenLocation
+	if randf() < 0.2: 
+		redbull_mode()
+	else:
+		redbull = false
+		move_speed = 1
 	pass
 
 func moveToMouse(_delta):
@@ -99,13 +109,13 @@ func moveTowardsTargetLocation(_delta):
 func changeDirectionsAtEdge():
 	if window.position.x + window.size.x > usable_rect.end.x:
 		direction.x = -1
-		$pet.flip_h = false
-		$pet/white_eye.flip_h = false
-		$pet/pupil.flip_h = false
-	elif window.position.x < usable_rect.position.x:
-		direction.x = 1
 		$pet.flip_h = true
 		$pet/white_eye.flip_h = true
+		$pet/pupil.flip_h = true
+	elif window.position.x < usable_rect.position.x:
+		direction.x = 1
+		$pet.flip_h = false
+		$pet/white_eye.flip_h = false
 		$pet/pupil.flip_h = true
 
 func runGravity():
@@ -195,5 +205,10 @@ func _input(event):
 func GetMagnitudeOf(value: Vector2):
 	return sqrt((value.x * value.x) + (value.y * value.y))
 
+func redbull_mode():
+	redbull = true
+	move_speed = 110
 
-	
+func move_back_and_forth():
+	var move_vector = Vector2i(direction * move_speed)
+	window.position += move_vector
