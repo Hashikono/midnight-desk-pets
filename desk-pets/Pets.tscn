@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://gmujd718rbs"]
+[gd_scene load_steps=5 format=3 uid="uid://gmujd718rbs"]
 
 [ext_resource type="Texture2D" uid="uid://ds7qgoj5umtx3" path="res://icon.svg" id="1_0tvji"]
 [ext_resource type="Script" uid="uid://bimu414n38ybd" path="res://viewport.gd" id="1_7shrm"]
@@ -11,7 +11,6 @@ size = Vector2(1155.5, 16)
 size = Vector2(128, 128)
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_7shrm")
 
 [node name="floor" type="StaticBody2D" parent="."]
 position = Vector2(573, 675)

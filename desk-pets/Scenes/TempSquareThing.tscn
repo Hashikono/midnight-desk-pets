@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b547iytli04rl"]
+
+[ext_resource type="PackedScene" uid="uid://drr8bdm3coyib" path="res://Scenes/TempSquare.tscn" id="1_s6fsm"]
+
+[node name="TempSquareThing" type="Node2D"]
+
+[node name="Square" parent="." instance=ExtResource("1_s6fsm")]

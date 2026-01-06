@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://drm3q68rmvqe6"]
+
+[ext_resource type="Script" uid="uid://c64qemxv2lhmq" path="res://test.gd" id="1_ubrfl"]
+[ext_resource type="PackedScene" uid="uid://drr8bdm3coyib" path="res://Scenes/TempSquare.tscn" id="2_1bywa"]
+
+[node name="TestingGrounds" type="Node2D"]
+script = ExtResource("1_ubrfl")
+tempSquare = ExtResource("2_1bywa")

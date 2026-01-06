@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WindowHelper")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1339c43f63ce99aed44ef46cb0ee9c8ae69586ae")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1760c016eddc51a7d31e4c6f99901221ee592610")]
 [assembly: System.Reflection.AssemblyProductAttribute("WindowHelper")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WindowHelper")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
