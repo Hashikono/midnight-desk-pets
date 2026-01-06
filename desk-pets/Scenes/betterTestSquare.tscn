@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhdfsn76hsh21"]
+
+[ext_resource type="Texture2D" uid="uid://dphc88j32yqfh" path="res://Assets/Square.png" id="1_m0jb3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ek63a"]
+
+[node name="CollisionShape2D" type="CollisionShape2D"]
+self_modulate = Color(0.4386941, 1, 0.9424714, 1)
+shape = SubResource("RectangleShape2D_ek63a")
+debug_color = Color(0.5241792, 0.5396035, 0.53990436, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+scale = Vector2(0.078, 0.078)
+texture = ExtResource("1_m0jb3")
