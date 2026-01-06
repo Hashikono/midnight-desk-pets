@@ -14,30 +14,34 @@ translated into GDscript once everything is finalized
     - we only need two coordinates for the corners of the rectanglular window (see figure below)
 
 - EDGE DETECTION SECTION OUTPUT: [x1, y1, x2, y2] -> length/4 = how many horiontal edges there are
-
+```
  1️⃣---------------2️⃣
  |                  |
  |                  |
  |                  |
  3️⃣---------------4️⃣
-
+```
 
 # MODEL 1
- \- \- \- \- \-   -> 0 0 0 - -
- \- \- \- \- \-   -> 0 0 0 1 1
- \- \- \- \- \-   -> 0 0 0 1 1
- \- \- \- \- \-   -> - 1 1 1 1
- \- \- \- \- \-   -> - 1 1 1 1
+```
+- - - - -   -> 0 0 0 - -
+- - - - -   -> 0 0 0 1 1
+- - - - -   -> 0 0 0 1 1
+- - - - -   -> - 1 1 1 1
+- - - - -   -> - 1 1 1 1
+```
 SHOULD OUTPUT in edgeDetectionOutput: (0,0)-(2,0)  (3,1)-(4,1) -> [[0,0,2,0], [3,1,4,1]]
 - IF THE COORDINATE PAIRS EQUAL, DON'T APPEND IT TO edgeDetection
 
 
 # MODEL 2
- \- \- \- \- \-   -> 1 1 1 - -
- \- \- \- \- \-   -> 1 0 0 0 0
- \- \- \- \- \-   -> 1 0 0 0 0
- \- \- \- \- \-   -> - 0 0 0 0
- \- \- \- \- \-   -> - 0 0 0 0
+```
+- - - - -   -> 1 1 1 - -
+- - - - -   -> 1 0 0 0 0
+- - - - -   -> 1 0 0 0 0
+- - - - -   -> - 0 0 0 0
+- - - - -   -> - 0 0 0 0
+```
 SHOULD OUTPUT in edgeDetectionOutput: (0,0)-(2,0)  (1,1)-(4,1) -> [[0,0,2,0], [1,1,4,1]]
 - THE TOP LAYERS OF EACH BLOCK IS THE ONLY LAYER THAT SHOULD BE CONSIDERED
 
