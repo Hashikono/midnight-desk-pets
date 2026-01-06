@@ -11,6 +11,7 @@ var max_fall_speed := 10
 
 var beingDragged: bool = false
 var dragDifference: Vector2
+var dragInertia: Vector2
 
 func _ready() -> void:
 	#var window_id := window.get_window_id()
@@ -21,39 +22,62 @@ func _ready() -> void:
 
 func _process(_delta):
 	
-	var window = get_window()
+	window = get_window()
+	usable_rect = DisplayServer.screen_get_usable_rect()
 	
 	
-	var usable_rect = DisplayServer.screen_get_usable_rect()
-		
+	
 	if(!beingDragged):
-		var move_vector = Vector2i(direction * move_speed)
+		moveBackAndForth()
+		#moveToMouse(_delta)
 		
-		window.position += move_vector
-		#window.position = lerp(Vector2(window.position), Vector2(DisplayServer.mouse_get_position()), move_speed * _delta) #mouse follow behaviour
+		runInertia(_delta)
 		
-		if window.position.x + window.size.x > usable_rect.end.x:
-			direction.x = -1
-		elif window.position.x < usable_rect.position.x:
-			direction.x = 1
-
-		velocity.y += gravity
-		velocity.y = min(velocity.y, max_fall_speed)
-		window.position += Vector2i(velocity)
-
-		if window.position.y >= target_y:
-			window.position.y = target_y
-			velocity.y = 0
+		changeDirectionsAtEdge()
+		runGravity()
 		pass
 	else:
-		var mousePos: Vector2 = DisplayServer.mouse_get_position()
-		window.position = mousePos + dragDifference
+		drag()
 		pass
+
+func moveToMouse(_delta):
+	window.position = lerp(Vector2(window.position), Vector2(DisplayServer.mouse_get_position()), move_speed * _delta) #mouse follow behaviour
+
+func moveBackAndForth():
+	var move_vector = Vector2i(direction * move_speed)
+	window.position += move_vector
+
+func changeDirectionsAtEdge():
+	if window.position.x + window.size.x > usable_rect.end.x:
+		direction.x = -1
+	elif window.position.x < usable_rect.position.x:
+		direction.x = 1
+
+func runGravity():
+	velocity.y += gravity
+	velocity.y = min(velocity.y, max_fall_speed)
+	window.position += Vector2i(velocity)
+
+	if window.position.y >= target_y:
+		window.position.y = target_y
+		velocity.y = 0
+
+func drag():
+	var mousePos: Vector2 = DisplayServer.mouse_get_position()
+	var currentPos: Vector2 = window.position
+	window.position = mousePos + dragDifference
+	dragInertia = Vector2(window.position) - currentPos
+	velocity.y = 0
+	pass
+
+func runInertia(_delta):
+	dragInertia.lerp(Vector2(), _delta * move_speed);
+	window.position += Vector2i(dragInertia)
+	pass
 
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
-			print("running")
 			if event.pressed:
 				beingDragged = true
 				dragDifference = window.position - DisplayServer.mouse_get_position()
