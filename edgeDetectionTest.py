@@ -32,6 +32,9 @@ windowHelperOutput2 = [
     4, 4
 ]
 
+#switch to test
+windowHelper = windowHelperOutput1
+
 #edge detection ouput (coordinates will be appended)
 edgeDetectionOutput = []
 
@@ -52,9 +55,21 @@ edgeDetectionOutput = []
 # - - - - -   -> - 0 0 0 0
 #SHOULD OUTPUT: (0,0)-(0,2)  (1,1)-(1,4)
 
+#THE TOP LAYERS OF EACH BLOCK IS THE ONLY LAYER THAT SHOULD BE CONSIDERED
+
+#IMPORTANT: JSON OUTPUT FORMAT
+# [
+#   ["Visual Studio Code", 0, 100, 50, 1500, 900],
+#   ["Chrome", 1, 0, 0, 1920, 1080],
+#   ["Desktop", 2, -1920, 0, 0, 1080]
+# ]
 
 
 
+
+#assuming
+model = []
+for block in len(window_helper)/6:
 
 
 
