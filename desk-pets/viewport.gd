@@ -13,6 +13,8 @@ var beingDragged: bool = false
 var dragDifference: Vector2
 var dragInertia: Vector2
 
+var bouncy: bool = true
+
 func _ready() -> void:
 	#var window_id := window.get_window_id()
 	DisplayServer.window_set_mouse_passthrough(PackedVector2Array())
@@ -31,9 +33,9 @@ func _process(_delta):
 		moveBackAndForth()
 		#moveToMouse(_delta)
 		
+		changeDirectionsAtEdge()
 		runInertia(_delta)
 		
-		changeDirectionsAtEdge()
 		runGravity()
 		pass
 	else:
@@ -59,15 +61,23 @@ func runGravity():
 	window.position += Vector2i(velocity)
 	
 	if window.position.y < usable_rect.position.y:
-		#direction.y = -1
 		dragInertia.y *= -1
+		
+		if(bouncy):
+			dragInertia.y *= -1
+		else:
+			dragInertia.y = 0
+		
+		window.position.y = usable_rect.position.y
 	if window.position.y + window.size.y > usable_rect.end.y:
 		velocity.y = 0;
-		dragInertia.y *= -1
+		
+		if(bouncy):
+			dragInertia.y *= -1
+		else:
+			dragInertia.y = 0
+		
 		window.position.y = usable_rect.end.y - window.size.y
-	#if window.position.y >= target_y:
-		#window.position.y = target_y
-		#velocity.y = 0
 
 func drag():
 	var mousePos: Vector2 = DisplayServer.mouse_get_position()
@@ -84,15 +94,30 @@ func drag():
 
 func runInertia(_delta):
 	dragInertia = dragInertia.lerp(Vector2(), _delta * move_speed);
+	
+	if(GetMagnitudeOf(dragInertia) < 0.05):
+		dragInertia = Vector2()
+		pass
+	
 	window.position += Vector2i(dragInertia)
 	deleteInertiaAtEdges()
 	pass
 
 func deleteInertiaAtEdges():
 	if window.position.x + window.size.x > usable_rect.end.x:
-		dragInertia.x *= -1
+		if(bouncy):
+			dragInertia.x *= -1;
+		else:
+			dragInertia.x = 0;
+		
+		window.position.x = usable_rect.end.x - window.size.x
 	elif window.position.x < usable_rect.position.x:
-		dragInertia.x *= -1
+		if(bouncy):
+			dragInertia.x *= -1;
+		else:
+			dragInertia.x = 0;
+		
+		window.position.x = usable_rect.position.x;
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -102,3 +127,7 @@ func _input(event):
 				dragDifference = window.position - DisplayServer.mouse_get_position()
 			else:
 				beingDragged = false
+
+
+func GetMagnitudeOf(value: Vector2):
+	return sqrt((value.x * value.x) + (value.y * value.y))
