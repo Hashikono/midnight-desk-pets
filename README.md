@@ -1,6 +1,13 @@
 # midnight-desk-pets
 Desktop pets with a murder mystery twist to it (●'◡'●)
 
+Features:
+- Wandering
+- Grabbing
+- Throwing
+- Cawing
+- Redbull (commented out cuz annoying)
+
 # IMPORTANT
 - This program only works on __WINDOWS__ as of now
 - Your computer must be in __ENGLISH__ or weird things will happen 
