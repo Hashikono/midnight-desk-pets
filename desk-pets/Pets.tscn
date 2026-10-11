@@ -1,9 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://gmujd718rbs"]
+[gd_scene load_steps=21 format=3 uid="uid://gmujd718rbs"]
 
 [ext_resource type="Script" uid="uid://bimu414n38ybd" path="res://viewport.gd" id="1_7shrm"]
 [ext_resource type="Texture2D" uid="uid://bw6rn3iypqm5c" path="res://Art/MurderyBirdSpritesheet.png" id="2_4wimt"]
 [ext_resource type="Texture2D" uid="uid://3eit3kv7bhi0" path="res://Art/MurderyBirdPupilSpritesheet.png" id="3_l1vat"]
 [ext_resource type="Texture2D" uid="uid://bx5enrb1lhoo5" path="res://Art/MurderyBirdEyeWhiteSpritesheet.png" id="4_gxjio"]
+[ext_resource type="Script" uid="uid://h1c70iy0ho3l" path="res://SoundEffectPlayerScript.gd" id="5_l1vat"]
+[ext_resource type="AudioStream" uid="uid://bo0dyr6wsbn05" path="res://Assets/Caw0.wav" id="6_gxjio"]
+[ext_resource type="AudioStream" uid="uid://bkwawui08gou1" path="res://Assets/Caw1.wav" id="7_k0xc2"]
+[ext_resource type="AudioStream" uid="uid://cjtg05biivpyv" path="res://Assets/Caw2.wav" id="8_jmn7v"]
+[ext_resource type="AudioStream" uid="uid://dmtdpbdcu8hy6" path="res://Assets/Caw3.wav" id="9_bpsqo"]
+[ext_resource type="AudioStream" uid="uid://btoch4m15hwtv" path="res://Assets/Caw4.wav" id="10_xr2o2"]
+[ext_resource type="AudioStream" uid="uid://dl8uppt7k6jl0" path="res://Assets/Caw5.wav" id="11_qlrg2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpfvp"]
 atlas = ExtResource("2_4wimt")
@@ -87,8 +94,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("soundEffectPlayer")]
 script = ExtResource("1_7shrm")
+soundEffectPlayer = NodePath("pet/AudioStreamPlayer")
 
 [node name="pet" type="AnimatedSprite2D" parent="."]
 position = Vector2(126, 209)
@@ -104,3 +112,7 @@ texture = ExtResource("4_gxjio")
 [node name="pupil" type="Sprite2D" parent="pet"]
 show_behind_parent = true
 texture = ExtResource("3_l1vat")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="pet"]
+script = ExtResource("5_l1vat")
+sounds = Array[AudioStream]([ExtResource("6_gxjio"), ExtResource("7_k0xc2"), ExtResource("8_jmn7v"), ExtResource("9_bpsqo"), ExtResource("10_xr2o2"), ExtResource("11_qlrg2")])
